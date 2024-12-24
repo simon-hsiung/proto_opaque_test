@@ -1,0 +1,31 @@
+//syntax = "proto3";
+edition = "2023";  // successor to proto2 and proto3
+
+package pb;
+
+option go_package = "test.pb";
+
+import "google/protobuf/go_features.proto";
+option features.(pb.go).api_level = API_OPAQUE;
+
+service SampleService {
+  rpc GetSampleData (SampleRequest) returns (SampleResponse) {}
+
+  rpc StreamDownload (StreamRequest) returns (stream StreamResponse) {}
+}
+
+message SampleRequest {
+  string id = 1;
+}
+
+message SampleResponse {
+  string data = 1;
+}
+
+message StreamRequest {
+  string id = 1;
+}
+
+message StreamResponse {
+  bytes payload = 1;
+}
